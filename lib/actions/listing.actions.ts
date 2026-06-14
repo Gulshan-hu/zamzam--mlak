@@ -101,7 +101,8 @@ export async function getListingsAction(
     )
 
     return { success: true, data: result }
-  } catch (error) {
+  } catch (err) {
+    console.error('Failed to fetch listings:', err)
     return { success: false, error: 'Failed to fetch listings' }
   }
 }
@@ -115,7 +116,8 @@ export async function getListingBySlugAction(
     await listingService.incrementViews(listing.id)
 
     return { success: true, data: listing }
-  } catch (error) {
+  } catch (err) {
+    console.error('Listing not found:', err)
     return { success: false, error: 'Listing not found' }
   }
 }
@@ -129,7 +131,8 @@ export async function approveListingAction(id: string): Promise<ActionResponse<L
     revalidatePath('/admin/listings')
 
     return { success: true, data: listing }
-  } catch (error) {
+  } catch (err) {
+    console.error('Failed to approve listing:', err)
     return { success: false, error: 'Failed to approve listing' }
   }
 }
@@ -145,7 +148,8 @@ export async function rejectListingAction(
     revalidatePath('/dashboard/listings')
 
     return { success: true, data: listing }
-  } catch (error) {
+  } catch (err) {
+    console.error('Failed to reject listing:', err)
     return { success: false, error: 'Failed to reject listing' }
   }
 }
@@ -159,7 +163,8 @@ export async function toggleFeaturedAction(id: string): Promise<ActionResponse<L
     revalidatePath('/admin/listings')
 
     return { success: true, data: listing }
-  } catch (error) {
+  } catch (err) {
+    console.error('Failed to toggle featured status:', err)
     return { success: false, error: 'Failed to toggle featured status' }
   }
 }

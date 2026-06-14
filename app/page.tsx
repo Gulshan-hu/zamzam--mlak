@@ -1,171 +1,92 @@
-"use client";
-
-import { useState } from "react";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { LanguageToggle } from "@/components/ui/LanguageToggle";
+import { Search, Sparkles, BarChart3, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
-import { Select } from "@/components/ui/Select";
-import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
-import { Modal } from "@/components/ui/Modal";
-import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { t } = useLanguage();
-
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border bg-surface">
-        <div className="container mx-auto flex items-center justify-between px-4 py-4">
-          <h1 className="text-2xl font-bold text-primary">{t("siteTitle")}</h1>
-          <div className="flex items-center gap-3">
-            <LanguageToggle />
-            <ThemeToggle />
+      {/* Hero Section */}
+      <section className="border-b border-border bg-gradient-to-b from-surface to-background py-20">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="mb-6 text-5xl font-bold text-text-primary">
+            Azərbaycanda Ən Yaxşı Əmlakı Tapın
+          </h1>
+          <p className="mb-8 text-xl text-text-muted">
+            AI texnologiyası ilə dəstəklənən müasir daşınmaz əmlak platforması
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Button variant="primary" size="lg">
+              <Search className="mr-2 h-5 w-5" />
+              Elan Axtar
+            </Button>
+            <Button variant="secondary" size="lg">
+              <Sparkles className="mr-2 h-5 w-5" />
+              AI Axtarış
+            </Button>
           </div>
         </div>
-      </header>
+      </section>
 
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-12">
-        <div className="mb-12 text-center">
-          <h2 className="mb-4 text-4xl font-bold text-text-primary">
-            {t("designSystemDemo")}
+      {/* Features Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-12 text-center text-3xl font-bold text-text-primary">
+            Xüsusiyyətlər
           </h2>
-          <p className="text-lg text-text-muted">
-            {t("componentLibrary")}
+          <div className="grid gap-6 md:grid-cols-3">
+            <Card hover>
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
+                <Sparkles className="h-6 w-6 text-primary" />
+              </div>
+              <h3 className="mb-2 text-xl font-semibold text-text-primary">
+                AI Axtarış
+              </h3>
+              <p className="text-text-muted">
+                Şəkil və ya təsvir ilə arzunuzdakı əmlakı tapın
+              </p>
+            </Card>
+
+            <Card hover>
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
+                <BarChart3 className="h-6 w-6 text-primary" />
+              </div>
+              <h3 className="mb-2 text-xl font-semibold text-text-primary">
+                AI Analiz
+              </h3>
+              <p className="text-text-muted">
+                Əmlakın investisiya potensialını qiymətləndirin
+              </p>
+            </Card>
+
+            <Card hover>
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
+                <MapPin className="h-6 w-6 text-primary" />
+              </div>
+              <h3 className="mb-2 text-xl font-semibold text-text-primary">
+                Xəritə Görünüşü
+              </h3>
+              <p className="text-text-muted">
+                Bütün elanları xəritədə görüntüləyin
+              </p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="border-t border-border bg-surface py-16">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="mb-4 text-3xl font-bold text-text-primary">
+            Əmlakınızı Satmaq İstəyirsiniz?
+          </h2>
+          <p className="mb-8 text-lg text-text-muted">
+            Platformamızda pulsuz elan yerləşdirin
           </p>
+          <Button variant="primary" size="lg">
+            Elan Əlavə Et
+          </Button>
         </div>
-
-        <div className="space-y-12">
-          {/* Buttons Section */}
-          <section>
-            <h3 className="mb-6 text-2xl font-semibold text-text-primary">
-              {t("buttons")}
-            </h3>
-            <div className="flex flex-wrap gap-4">
-              <Button variant="primary" size="sm">
-                {t("primarySmall")}
-              </Button>
-              <Button variant="primary" size="md">
-                {t("primaryMedium")}
-              </Button>
-              <Button variant="primary" size="lg">
-                {t("primaryLarge")}
-              </Button>
-              <Button variant="secondary">{t("secondary")}</Button>
-              <Button variant="ghost">{t("ghost")}</Button>
-              <Button variant="danger">{t("danger")}</Button>
-              <Button disabled>{t("disabled")}</Button>
-            </div>
-          </section>
-
-          {/* Inputs Section */}
-          <section>
-            <h3 className="mb-6 text-2xl font-semibold text-text-primary">
-              {t("formInputs")}
-            </h3>
-            <div className="grid gap-6 md:grid-cols-2">
-              <Input label={t("email")} type="email" placeholder={t("enterEmail")} />
-              <Input
-                label={t("password")}
-                type="password"
-                placeholder={t("enterPassword")}
-              />
-              <Input
-                label={t("withError")}
-                type="text"
-                error={t("fieldRequired")}
-              />
-              <Select
-                label={t("propertyType")}
-                options={[
-                  { value: "apartment", label: t("apartment") },
-                  { value: "house", label: t("house") },
-                  { value: "land", label: t("land") },
-                  { value: "commercial", label: t("commercial") },
-                ]}
-              />
-            </div>
-          </section>
-
-          {/* Badges Section */}
-          <section>
-            <h3 className="mb-6 text-2xl font-semibold text-text-primary">
-              {t("badges")}
-            </h3>
-            <div className="flex flex-wrap gap-4">
-              <Badge variant="green">{t("forSale")}</Badge>
-              <Badge variant="blue">{t("forRent")}</Badge>
-              <Badge variant="gray">{t("pending")}</Badge>
-              <Badge variant="red">{t("rejected")}</Badge>
-            </div>
-          </section>
-
-          {/* Cards Section */}
-          <section>
-            <h3 className="mb-6 text-2xl font-semibold text-text-primary">
-              {t("cards")}
-            </h3>
-            <div className="grid gap-6 md:grid-cols-3">
-              <Card>
-                <h4 className="mb-2 text-lg font-semibold text-text-primary">
-                  {t("basicCard")}
-                </h4>
-                <p className="text-text-muted">
-                  {t("basicCardDesc")}
-                </p>
-              </Card>
-              <Card hover>
-                <h4 className="mb-2 text-lg font-semibold text-text-primary">
-                  {t("hoverCard")}
-                </h4>
-                <p className="text-text-muted">
-                  {t("hoverCardDesc")}
-                </p>
-              </Card>
-              <Card hover>
-                <div className="mb-4 h-32 rounded-lg bg-surface-muted" />
-                <h4 className="mb-2 text-lg font-semibold text-text-primary">
-                  {t("propertyCard")}
-                </h4>
-                <p className="text-text-muted">{t("sampleProperty")}</p>
-                <div className="mt-4 flex items-center justify-between">
-                  <Badge variant="green">{t("sale")}</Badge>
-                  <span className="text-xl font-bold text-primary">
-                    ₼250,000
-                  </span>
-                </div>
-              </Card>
-            </div>
-          </section>
-
-          {/* Modal Section */}
-          <section>
-            <h3 className="mb-6 text-2xl font-semibold text-text-primary">
-              {t("modal")}
-            </h3>
-            <Button onClick={() => setIsModalOpen(true)}>{t("openModal")}</Button>
-          </section>
-        </div>
-      </main>
-
-      {/* Modal Component */}
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        title={t("sampleModal")}
-      >
-        <p className="mb-4 text-text-muted">
-          {t("modalDescription")}
-        </p>
-        <div className="flex gap-3">
-          <Button onClick={() => setIsModalOpen(false)}>{t("close")}</Button>
-          <Button variant="secondary">{t("action")}</Button>
-        </div>
-      </Modal>
+      </section>
     </div>
   );
 }
